@@ -36,15 +36,40 @@
 
     <ImageButton
         android:id="@+id/imageButton"
-        android:layout_width="48dp"
-        android:layout_height="41dp"
+        android:layout_width="56dp"
+        android:layout_height="48dp"
         android:layout_marginStart="348dp"
         android:layout_marginLeft="348dp"
         android:layout_marginTop="4dp"
         android:background="@android:color/transparent"
+        android:contentDescription="@string/app_name"
         android:src="@drawable/ic_baseline_more_vert_24"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/barrier"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="published,avatar,author,imageButton"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/netology"
+        android:layout_width="362dp"
+        android:layout_height="254dp"
+        android:layout_marginStart="64dp"
+        android:layout_marginLeft="64dp"
+        android:layout_marginTop="84dp"
+        android:layout_marginEnd="61dp"
+        android:layout_marginRight="61dp"
+        android:layout_marginBottom="366dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

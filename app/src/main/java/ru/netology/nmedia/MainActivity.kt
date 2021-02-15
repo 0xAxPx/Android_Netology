@@ -26,6 +26,8 @@ class MainActivity : AppCompatActivity() {
             author.text = data.author
             val published = findViewById<TextView>(R.id.published)
             published.text = data.published
+            val netology_greetings = findViewById<TextView>(R.id.netology)
+            netology_greetings.setText(data.text)
         }
     }
 
