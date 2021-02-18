@@ -17,18 +17,18 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        val jsonToString = Util.getJsonFromAssets(applicationContext, POSTS_FILE)
-        if (jsonToString != null) {
-            val posts: PostData = Gson().fromJson<PostData>(jsonToString)
-            Log.i("Reading post data:", posts.toString())
-            val data = posts.data.get(0)
-            val author = findViewById<TextView>(R.id.author)
-            author.text = data.author
-            val published = findViewById<TextView>(R.id.published)
-            published.text = data.published
-            val netology_greetings = findViewById<TextView>(R.id.netology)
-            netology_greetings.setText(data.text)
-        }
+//        val jsonToString = Util.getJsonFromAssets(applicationContext, POSTS_FILE)
+//        if (jsonToString != null) {
+//            val posts: PostData = Gson().fromJson<PostData>(jsonToString)
+//            Log.i("Reading post data:", posts.toString())
+//            val data = posts.data.get(0)
+//            val author = findViewById<TextView>(R.id.author)
+//            author.text = data.author
+//            val published = findViewById<TextView>(R.id.published)
+//            published.text = data.published
+//            val netology_greetings = findViewById<TextView>(R.id.netology)
+//            netology_greetings.setText(data.text)
+//        }
     }
 
     companion object {
