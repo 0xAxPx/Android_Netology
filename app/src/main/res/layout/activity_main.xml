@@ -16,8 +16,9 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="@id/barrier"
         app:layout_constraintStart_toStartOf="parent"
-        tools:srcCompat="@sample/posts.json/data/authorAvatar" />
+        android:src="@drawable/netology_avatar"/>
 
+    <!--    author is set up in MainActivity-->
     <TextView
         android:id="@+id/author"
         android:layout_width="0dp"
@@ -30,9 +31,9 @@
         app:layout_constraintBottom_toTopOf="@+id/published"
         app:layout_constraintEnd_toStartOf="@id/menu"
         app:layout_constraintStart_toEndOf="@id/avatar"
-        app:layout_constraintVertical_chainStyle="packed"
-        tools:text="@sample/posts.json/data/author" />
+        app:layout_constraintVertical_chainStyle="packed"/>
 
+    <!--    published is set up in MainActivity-->
     <TextView
         android:id="@+id/published"
         android:layout_width="0dp"
@@ -43,8 +44,7 @@
         app:layout_constraintTop_toBottomOf="@id/author"
         app:layout_constraintBottom_toBottomOf="@id/barrier"
         app:layout_constraintEnd_toStartOf="@id/menu"
-        app:layout_constraintStart_toEndOf="@id/avatar"
-        tools:text="@sample/posts.json/data/published" />
+        app:layout_constraintStart_toEndOf="@id/avatar"/>
 
     <ImageButton
         android:id="@+id/menu"
@@ -55,16 +55,16 @@
         android:contentDescription="@string/description_post_menu"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_more_vert_24" />
+        android:src="@drawable/ic_more_vert_24" />
 
     <androidx.constraintlayout.widget.Barrier
         android:id="@+id/barrier"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:barrierDirection="bottom"
-        app:constraint_referenced_ids="avatar,published,menu"
-        />
+        app:constraint_referenced_ids="avatar,published,menu"/>
 
+<!--    content is set up in MainActivity-->
     <TextView
         android:id="@+id/content"
         android:layout_width="0dp"
@@ -73,7 +73,6 @@
         android:autoLink="web"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/barrier"
-        tools:text="@sample/posts.json/data/content" />
+        app:layout_constraintTop_toBottomOf="@id/barrier"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
