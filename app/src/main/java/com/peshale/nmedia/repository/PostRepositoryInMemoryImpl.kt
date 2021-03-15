@@ -11,8 +11,8 @@ class PostRepositoryInMemoryImpl : PostRepository {
         author = "Нетология. Университет интернет-профессий",
         published = "21 мая 2020",
         content = "Привет, это новая Нетология! Когда-то Нетология начиналась с интенсивов по онлайн-маркетингу. Затем появились курсы по дизайну, разработке, аналитике и управлению. Мы растём сами и помогаем расти студентам: от новичков до уверенных профессионалов. Но самое важное остаётся с нами: мы верим, что в каждом уже есть сила, которая заставляет хотеть больше, целиться выше, бежать быстрее. Наша миссия — помочь встать на путь роста и начать цепочку перемен → http://netolo.gy/fyb",
-        likes = 999,
-        share = 10999,
+        likes = 0,
+        share = 11999,
         views = 999999
     )
 
@@ -23,7 +23,7 @@ class PostRepositoryInMemoryImpl : PostRepository {
     override fun like() {
         post = post.copy(
             likedByMe = !post.likedByMe,
-            likes = if (post.likedByMe) ++post.likes else --post.likes
+            likes = if (!post.likedByMe) ++post.likes else --post.likes
         )
         data.value = post
     }
@@ -39,7 +39,6 @@ class PostRepositoryInMemoryImpl : PostRepository {
     }
 
     override fun counter(count: Int): String {
-        println("Counter $count")
         return when {
             (count >= 1_000_000) -> "${"%.1f".format(count / 1_000_000.toDouble())}M"
             (count in 1000..9_999) -> "${"%.1f".format(count / 1_000.toDouble())}K"
