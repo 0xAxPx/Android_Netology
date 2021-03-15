@@ -1,20 +1,12 @@
 package com.peshale.nmedia.util
 
-import android.widget.TextView
-
 object Util {
-    fun counter(textView: TextView, current: Int) {
-        if (current.toString().length == 4) {
-            val toDbl = current / 1000.0
-            textView.text = toDbl.toString() + "K"
-        } else if (current.toString().length == 5 || current.toString().length == 6) {
-            val toDbl = current / 1000
-            textView.text = toDbl.toString() + "K"
-        } else if (current.toString().length == 7) {
-            val toDbl = current / 1_000_000.0
-            textView.text = toDbl.toString().substring(0, 3) + "M"
-        } else {
-            textView.text = current.toString()
-        }
+    fun counter(count: Int): String {
+        return when {
+            (count >= 1_000_000) -> "${"%.1f".format(count / 1_000_000.toDouble())}M"
+            (count in 1000..9_999) -> "${"%.1f".format(count / 1_000.toDouble())}K"
+            (count in 10_000..999_999) -> "${count / 1000}K"
+            else -> count
+        }.toString()
     }
 }
