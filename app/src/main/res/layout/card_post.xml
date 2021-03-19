@@ -62,6 +62,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="serif"
         android:textAlignment="viewStart"
+        android:gravity="start"
         android:layout_marginTop="@dimen/common_spacing"
         android:layout_marginBottom="@dimen/common_spacing"
         android:autoLink="web"
