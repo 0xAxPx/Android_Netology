@@ -3,8 +3,8 @@ package com.peshale.nmedia
 import androidx.appcompat.app.AppCompatActivity
 import androidx.activity.viewModels
 import android.os.Bundle
+import com.peshale.nmedia.adapter.PostAdapter
 import com.peshale.nmedia.databinding.ActivityMainBinding
-import com.peshale.nmedia.dto.Icons
 import com.peshale.nmedia.vmodel.PostViewModel
 
 class MainActivity : AppCompatActivity() {
@@ -15,31 +15,13 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val viewModel: PostViewModel by viewModels()
-
-        viewModel.data.observe(this, { post ->
-            with(binding) {
-                author.text = post.author
-                published.text = post.published
-                content.text = post.content
-                likeCount.text = viewModel.counter(Icons.LIKES)
-                shareCount.text = viewModel.counter(Icons.SHARES)
-                viewsCount.text = viewModel.counter(Icons.VIEWS)
-                like.setImageResource(
-                    if (post.likedByMe) R.drawable.baseline_favorite_red_500_24dp else R.drawable.baseline_favorite_border_black_24dp
-                )
-            }
-        })
-
-        binding.like.setOnClickListener {
-            viewModel.like()
+        val adapter = PostAdapter({viewModel.likeById(it.id)}, {viewModel.toShareById(it.id)}) {
+            viewModel.toShareById(it.id)
+            viewModel.toViewById(it.id)
         }
-
-        binding.share.setOnClickListener {
-            viewModel.share()
-        }
-
-        binding.views.setOnClickListener {
-            viewModel.view()
+        binding.posts.adapter = adapter
+        viewModel.data.observe(this) { posts ->
+            adapter.list = posts
         }
     }
 }

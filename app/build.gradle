@@ -6,6 +6,7 @@ plugins {
 
 def lifecycleVersion = "2.2.0"
 def archVersion = "2.1.0"
+def recycleViewVersion = "1.1.0"
 
 android {
     compileSdkVersion 30
@@ -51,6 +52,8 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion"
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycleVersion"
     implementation "androidx.activity:activity-ktx:1.2.0"
+    implementation "androidx.recyclerview:recyclerview:$recycleViewVersion"
+    implementation "androidx.recyclerview:recyclerview-selection:$recycleViewVersion"
     kapt "androidx.lifecycle:lifecycle-compiler:$lifecycleVersion"
     testImplementation "androidx.arch.core:core-testing:$archVersion"
 
