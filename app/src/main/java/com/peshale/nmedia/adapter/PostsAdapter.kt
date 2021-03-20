@@ -2,48 +2,36 @@ package com.peshale.nmedia.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.peshale.nmedia.R
 import com.peshale.nmedia.databinding.CardPostBinding
 import com.peshale.nmedia.dto.Post
 import com.peshale.nmedia.utils.Utils
 
-typealias OnLikeListener = (post: Post) -> Unit
-typealias OnShareListener = (post: Post) -> Unit
-typealias OnViewListener = (post: Post) -> Unit
+interface OnItemClickListener {
+    fun onLike(post: Post) {}
+    fun onShare(post: Post) {}
+    fun onView(post: Post) {}
+}
 
-class PostAdapter(
-    private val onLikeListener: OnLikeListener,
-    private var onShareListener: OnShareListener,
-    private var onViewListener: OnViewListener
-) : RecyclerView.Adapter<PostViewHolder>() {
-
-    var list = emptyList<Post>()
-        set(value) {
-            field = value
-            notifyDataSetChanged()
-        }
+class PostAdapter(private val onItemClickListener: OnItemClickListener): ListAdapter<Post, PostViewHolder>(PostDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PostViewHolder {
         val binding = CardPostBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return PostViewHolder(binding, onLikeListener, onShareListener, onViewListener)
+        return PostViewHolder(binding, onItemClickListener)
     }
 
     override fun onBindViewHolder(holder: PostViewHolder, position: Int) {
-        val post = list[position]
+        val post = getItem(position)
         holder.bind(post)
     }
-
-    override fun getItemCount(): Int = list.size
-
 }
 
 class PostViewHolder (
     private val binding: CardPostBinding,
-    private val onLikeListener: OnLikeListener,
-    private val onShareListener: OnShareListener,
-    private val onViewListener: OnViewListener
-
+    private val onItemClickListener: OnItemClickListener
 ) : RecyclerView.ViewHolder(binding.root) {
 
     fun bind (post: Post) {
@@ -62,14 +50,24 @@ class PostViewHolder (
                 }
             )
             likeButton.setOnClickListener {
-                onLikeListener(post)
+                onItemClickListener.onLike(post)
             }
             toShareButton.setOnClickListener {
-                onShareListener(post)
+                onItemClickListener.onShare(post)
             }
             viewsButton.setOnClickListener {
-                onViewListener(post)
+                onItemClickListener.onView(post)
             }
         }
+    }
+}
+
+class PostDiffCallback : DiffUtil.ItemCallback<Post>() {
+    override fun areItemsTheSame(oldItem: Post, newItem: Post): Boolean {
+        return oldItem.id == newItem.id
+    }
+
+    override fun areContentsTheSame(oldItem: Post, newItem: Post): Boolean {
+        return oldItem == newItem
     }
 }

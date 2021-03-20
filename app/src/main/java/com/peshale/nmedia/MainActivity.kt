@@ -3,8 +3,10 @@ package com.peshale.nmedia
 import androidx.appcompat.app.AppCompatActivity
 import androidx.activity.viewModels
 import android.os.Bundle
+import com.peshale.nmedia.adapter.OnItemClickListener
 import com.peshale.nmedia.adapter.PostAdapter
 import com.peshale.nmedia.databinding.ActivityMainBinding
+import com.peshale.nmedia.dto.Post
 import com.peshale.nmedia.vmodel.PostViewModel
 
 class MainActivity : AppCompatActivity() {
@@ -15,13 +17,23 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val viewModel: PostViewModel by viewModels()
-        val adapter = PostAdapter({viewModel.likeById(it.id)}, {viewModel.toShareById(it.id)}) {
-            viewModel.toShareById(it.id)
-            viewModel.toViewById(it.id)
-        }
+        val adapter = PostAdapter(object: OnItemClickListener {
+            override fun onLike(post: Post) {
+                viewModel.likeById(post.id)
+            }
+
+            override fun onShare(post: Post) {
+                viewModel.toShareById(post.id)
+            }
+
+            override fun onView(post: Post) {
+                viewModel.toViewById(post.id)
+            }
+        })
+
         binding.posts.adapter = adapter
-        viewModel.data.observe(this) { posts ->
-            adapter.list = posts
-        }
+        viewModel.data.observe(this, {
+            posts -> adapter.submitList(posts)
+        })
     }
 }
