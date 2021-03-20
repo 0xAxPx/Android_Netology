@@ -35,7 +35,7 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun onDelete(post: Post) {
-                viewModel.removeById(post.id)
+                viewModel.deleteById(post.id)
             }
 
             override fun onEdit(post: Post) {
