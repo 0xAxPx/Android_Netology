@@ -9,4 +9,6 @@ interface PostRepository {
     fun likeById(id: Long)
     fun toShareById(id: Long)
     fun toViewById(id: Long)
+    fun removeById(id: Long)
+    fun addPost(post: Post)
 }

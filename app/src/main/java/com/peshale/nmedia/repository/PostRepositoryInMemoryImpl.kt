@@ -1,11 +1,15 @@
 package com.peshale.nmedia.repository
 
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.peshale.nmedia.dto.Post
+import java.time.LocalDateTime
 
 class PostRepositoryInMemoryImpl : PostRepository {
 
+    private var nextId = 1L
     private var posts:List<Post> = listOf(
         Post(
             id = 9,
@@ -110,5 +114,24 @@ class PostRepositoryInMemoryImpl : PostRepository {
             }
         }
         data.value = posts
+    }
+
+    override fun removeById(id: Long) {
+        posts = posts.filter { it.id == id }
+        data.value = posts
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    override fun addPost(post: Post) {
+        posts = listOf(
+            post.copy(
+                id = nextId++,
+                author = "Test Author",
+                likedByMe = false,
+                published = LocalDateTime.now().toString()
+            )
+        ) + posts
+        data.value = posts
+        return
     }
 }

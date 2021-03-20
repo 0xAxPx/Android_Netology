@@ -2,6 +2,7 @@ package com.peshale.nmedia.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.PopupMenu
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -14,6 +15,7 @@ interface OnItemClickListener {
     fun onLike(post: Post) {}
     fun onShare(post: Post) {}
     fun onView(post: Post) {}
+    fun onRemove(post: Post) {}
 }
 
 class PostAdapter(private val onItemClickListener: OnItemClickListener): ListAdapter<Post, PostViewHolder>(PostDiffCallback()) {
@@ -49,6 +51,24 @@ class PostViewHolder (
                     R.drawable.baseline_favorite_border_black_24dp
                 }
             )
+
+            //when click on Menu item
+            menu.setOnClickListener { it ->
+                PopupMenu(it.context, it).apply {
+                    inflate(R.menu.menu_main)
+                    setOnMenuItemClickListener { item ->
+                        when (item.itemId) {
+                            R.id.menuItemDelete -> {
+                                onItemClickListener.onRemove(post)
+                                true
+                            }
+                            else -> false
+                        }
+                    }
+                }.show()
+            }
+
+
             likeButton.setOnClickListener {
                 onItemClickListener.onLike(post)
             }
@@ -58,6 +78,7 @@ class PostViewHolder (
             viewsButton.setOnClickListener {
                 onItemClickListener.onView(post)
             }
+
         }
     }
 }

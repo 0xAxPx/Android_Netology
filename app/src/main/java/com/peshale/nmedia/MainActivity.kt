@@ -29,6 +29,10 @@ class MainActivity : AppCompatActivity() {
             override fun onView(post: Post) {
                 viewModel.toViewById(post.id)
             }
+
+            override fun onRemove(post: Post) {
+                viewModel.removeById(post.id)
+            }
         })
 
         binding.posts.adapter = adapter

@@ -8,4 +8,7 @@
     <string name="views">Просмотры</string>
     <string name="to_share">Поделиться</string>
     <string name="like_button">Нравится</string>
+    <string name="post_text">Содержание поста</string>
+    <string name="menu_item_edit">Редактировать</string>
+    <string  name="menu_item_delete">Удалить</string>
 </resources>
