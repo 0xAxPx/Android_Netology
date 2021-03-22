@@ -1,15 +1,99 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".activity.MainActivity">
 
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/inputAreaBarrier"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="top"
+        app:constraint_referenced_ids="inputTextArea,confirmationButton" />
+
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/posts"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toTopOf="@id/inputAreaBarrier"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="0dp"
         tools:listitem="@layout/card_post" />
-</FrameLayout>
+
+    <EditText
+        android:id="@+id/inputTextArea"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/enter_text"
+        android:inputType="textMultiLine"
+        android:background="@android:color/transparent"
+        android:padding="@dimen/common_spacing"
+        android:importantForAutofill="no"
+        app:layout_constraintTop_toTopOf="@id/inputAreaBarrier"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/confirmationButton"
+        app:layout_constraintStart_toStartOf="parent"
+        />
+
+    <ImageButton
+        android:id="@+id/confirmationButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:contentDescription="@string/enter_confirmation"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/inputTextArea"
+        app:layout_constraintTop_toBottomOf="@+id/posts"
+        app:srcCompat="@drawable/baseline_save_alt_black_24dp" />
+
+    <ImageButton
+        android:id="@+id/cancelEditingButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:background="@android:color/darker_gray"
+        android:contentDescription="@string/undo_editing"
+        app:layout_constraintBottom_toBottomOf="@+id/posts"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/baseline_close_black_24dp" />
+
+    <TextView
+        android:id="@+id/postUndo"
+        android:layout_width="0dp"
+        android:layout_height="24dp"
+        android:background="@color/colorLightGrey"
+        android:ellipsize="end"
+        android:singleLine="true"
+        android:textSize="12sp"
+        android:gravity="center"
+        app:layout_constraintBottom_toTopOf="@id/inputTextArea"
+        app:layout_constraintEnd_toStartOf="@id/cancelEditingButton"
+        app:layout_constraintStart_toEndOf="@id/editImage"
+        tools:text="@sample/posts.json/data/author" />
+
+
+    <ImageView
+        android:id="@+id/editImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/colorLightGrey"
+        android:contentDescription="@string/edit_image"
+        app:layout_constraintBottom_toBottomOf="@+id/postUndo"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/baseline_edit_color_black_24dp" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/group"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="731dp"
+        android:background="@color/colorLightGrey"
+        android:visibility="gone"
+        app:constraint_referenced_ids="postUndo,editImage,cancelEditingButton"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

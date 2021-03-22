@@ -8,7 +8,7 @@
     tools:context=".activity.MainActivity">
 
     <ImageView
-        android:id= "@+id/logo"
+        android:id= "@+id/avatar"
         android:layout_width="@dimen/netology_avatar_size"
         android:layout_height="@dimen/netology_avatar_size"
         android:layout_marginBottom="@dimen/common_spacing"
@@ -16,7 +16,8 @@
         app:layout_constraintBottom_toBottomOf="@id/barrierTop"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/netology_avatar" />
+        app:srcCompat="@drawable/netology_avatar"
+        tools:srcCompat="@sample/avatars" />
 
     <TextView
         android:id="@+id/author"
@@ -27,8 +28,8 @@
         android:ellipsize="end"
         android:singleLine="true"
         app:layout_constraintBottom_toTopOf="@id/published"
-        app:layout_constraintEnd_toStartOf="@id/imMenu"
-        app:layout_constraintStart_toEndOf="@+id/logo"
+        app:layout_constraintEnd_toStartOf="@id/menu"
+        app:layout_constraintStart_toEndOf="@+id/avatar"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_chainStyle="packed"
         tools:text="@sample/posts.json/data/author" />
@@ -41,20 +42,21 @@
         android:layout_marginEnd="@dimen/common_spacing"
         android:layout_marginBottom="@dimen/common_spacing"
         app:layout_constraintBottom_toBottomOf="@id/barrierTop"
-        app:layout_constraintStart_toEndOf="@id/logo"
+        app:layout_constraintStart_toEndOf="@id/avatar"
         app:layout_constraintTop_toBottomOf="@id/author"
         tools:text="@sample/posts.json/data/published" />
 
     <ImageButton
-        android:id="@+id/imMenu"
+        android:id="@+id/menu"
         android:layout_width="24dp"
         android:layout_height="24dp"
         android:backgroundTint="@android:color/transparent"
-        app:srcCompat="@drawable/ic_more_vert_24"
+        android:contentDescription="@string/menu_button"
+        app:srcCompat="@drawable/ic_more_vert_menu_24"
         android:tint="#7A7777"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:srcCompat="@drawable/ic_baseline_more_vert_24" />
+        tools:srcCompat="@drawable/ic_more_vert_menu_24" />
 
     <TextView
         android:id="@+id/content"
@@ -95,7 +97,7 @@
         tools:text="@string/number_of_likes" />
 
     <ImageButton
-        android:id="@+id/toShareButton"
+        android:id="@+id/shareButton"
         android:layout_width="24dp"
         android:layout_height="24dp"
         android:layout_marginStart="@dimen/common_spacing"
@@ -112,9 +114,9 @@
         android:layout_height="24dp"
         android:textAlignment="center"
         android:gravity="center_horizontal"
-        app:layout_constraintStart_toEndOf="@id/toShareButton"
-        app:layout_constraintTop_toTopOf="@id/toShareButton"
-        tools:text="@string/number_of_share"/>
+        app:layout_constraintStart_toEndOf="@id/shareButton"
+        app:layout_constraintTop_toTopOf="@id/shareButton"
+        tools:text="@string/number_of_share" />
 
 
     <ImageButton
@@ -133,8 +135,8 @@
         android:layout_height="24dp"
         android:layout_marginEnd="5dp"
         android:textAlignment="center"
+        android:gravity="center_horizontal"
         android:layout_marginRight="5dp"
-        android:layout_gravity="center_horizontal"
         android:layout_marginTop="@dimen/common_spacing"
         app:layout_constraintTop_toTopOf="@id/barrierBottom"
         app:layout_constraintEnd_toEndOf="parent"
@@ -145,7 +147,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:barrierDirection="bottom"
-        app:constraint_referenced_ids="logo,published,imMenu"
+        app:constraint_referenced_ids="avatar,published,menu"
         tools:layout_editor_absoluteX="16dp"
         tools:layout_editor_absoluteY="80dp" />
 
