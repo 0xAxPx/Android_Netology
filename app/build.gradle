@@ -7,6 +7,7 @@ plugins {
 def lifecycleVersion = "2.2.0"
 def archVersion = "2.1.0"
 def recycleViewVersion = "1.1.0"
+def mdcVersion = "1.3.0"
 
 android {
     compileSdkVersion 30
@@ -62,4 +63,7 @@ dependencies {
     implementation 'com.github.tony19:logback-android:2.0.0'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+
+    //mdc
+    implementation "com.google.android.material:material:$mdcVersion"
 }
