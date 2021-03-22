@@ -3,8 +3,10 @@ package com.peshale.nmedia
 import androidx.appcompat.app.AppCompatActivity
 import androidx.activity.viewModels
 import android.os.Bundle
+import com.peshale.nmedia.adapter.OnItemClickListener
+import com.peshale.nmedia.adapter.PostAdapter
 import com.peshale.nmedia.databinding.ActivityMainBinding
-import com.peshale.nmedia.dto.Icons
+import com.peshale.nmedia.dto.Post
 import com.peshale.nmedia.vmodel.PostViewModel
 
 class MainActivity : AppCompatActivity() {
@@ -15,31 +17,23 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val viewModel: PostViewModel by viewModels()
+        val adapter = PostAdapter(object: OnItemClickListener {
+            override fun onLike(post: Post) {
+                viewModel.likeById(post.id)
+            }
 
-        viewModel.data.observe(this, { post ->
-            with(binding) {
-                author.text = post.author
-                published.text = post.published
-                content.text = post.content
-                likeCount.text = viewModel.counter(Icons.LIKES)
-                shareCount.text = viewModel.counter(Icons.SHARES)
-                viewsCount.text = viewModel.counter(Icons.VIEWS)
-                like.setImageResource(
-                    if (post.likedByMe) R.drawable.baseline_favorite_red_500_24dp else R.drawable.baseline_favorite_border_black_24dp
-                )
+            override fun onShare(post: Post) {
+                viewModel.toShareById(post.id)
+            }
+
+            override fun onView(post: Post) {
+                viewModel.toViewById(post.id)
             }
         })
 
-        binding.like.setOnClickListener {
-            viewModel.like()
-        }
-
-        binding.share.setOnClickListener {
-            viewModel.share()
-        }
-
-        binding.views.setOnClickListener {
-            viewModel.view()
-        }
+        binding.posts.adapter = adapter
+        viewModel.data.observe(this, {
+            posts -> adapter.submitList(posts)
+        })
     }
 }
