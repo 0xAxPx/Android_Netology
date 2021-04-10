@@ -143,7 +143,7 @@ class PostRepositoryInMemoryImpl : PostRepository {
             posts = listOf(
                 post.copy(
                     id = nextId++,
-                    author = System.getProperty("user.name"),
+                    author = "Test User",
                     published = Utils.addLocalDataTime(),
                     likedByMe = false,
                     likes = 0,
