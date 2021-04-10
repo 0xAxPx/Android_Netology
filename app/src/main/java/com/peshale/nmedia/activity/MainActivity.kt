@@ -99,8 +99,8 @@ class MainActivity : AppCompatActivity() {
                     return
                 }
                 data?.extras.let {
-                    val postContent = it!!["content"].toString()
-                    val videoLink = it["videoLink"].toString()
+                    val postContent = it?.get("content").toString()
+                    val videoLink = it?.get("videoLink").toString()
                     viewModel.changeContent(postContent, videoLink)
                     viewModel.addPost()
                 }
@@ -110,8 +110,8 @@ class MainActivity : AppCompatActivity() {
                     return
                 } else {
                     data?.extras.let {
-                        val postContent = it!!["content"].toString()
-                        val videoLink = it["videoLink"].toString()
+                        val postContent = it?.get("content").toString()
+                        val videoLink = it?.get("videoLink").toString()
                         viewModel.changeContent(postContent, videoLink)
                     }
                 }

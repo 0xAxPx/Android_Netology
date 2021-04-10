@@ -14,6 +14,7 @@ import kotlin.math.floor
 
 class Utils {
     companion object {
+        val fileRepo = "nmedia_posts.json"
         fun counter(count: Int) : String {
             return when (count) {
                 in 0..999 -> count.toString()
