@@ -6,8 +6,8 @@ import androidx.lifecycle.MutableLiveData
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.peshale.nmedia.dto.Post
-import com.peshale.nmedia.utils.Utils
-import com.peshale.nmedia.utils.Utils.Companion.fileRepo
+import com.peshale.nmedia.utils.AndroidUtils
+import com.peshale.nmedia.utils.AndroidUtils.Companion.FILE_STORE
 
 class PostRepositoryFileImpl(
     private val context: Context
@@ -15,7 +15,7 @@ class PostRepositoryFileImpl(
 
     private val gson = Gson()
     private val type = TypeToken.getParameterized(List::class.java, Post::class.java).type
-    private val file = context.filesDir.resolve(fileRepo)
+    private val file = context.filesDir.resolve(FILE_STORE)
     private var posts = run {
         if (!file.exists()) return@run emptyList<Post>()
         file.readText()
@@ -26,6 +26,7 @@ class PostRepositoryFileImpl(
                 gson.fromJson(it, type)
             }
     }
+
     var nextId = if (posts.isEmpty()) 1 else (posts.first().id + 1)
 
     private val data = MutableLiveData(posts)
@@ -38,7 +39,7 @@ class PostRepositoryFileImpl(
                 post.copy(
                     id = nextId++,
                     author = "Test User",
-                    published = Utils.addLocalDataTime(),
+                    published = AndroidUtils.addLocalDataTime(),
                     likedByMe = false,
                     likes = 0,
                     shares = 0,
@@ -80,11 +81,7 @@ class PostRepositoryFileImpl(
 
     override fun toShareById(id: Long) {
         posts = posts.map {
-            if (it.id != id) {
-                it
-            } else {
-                it.copy(shares = it.shares + 1)
-            }
+            if (it.id == id) it.copy(shares = it.shares + 1) else it
         }
         data.value = posts
         sync()
@@ -99,11 +96,16 @@ class PostRepositoryFileImpl(
             }
         }
         data.value = posts
+        sync()
     }
 
     private fun sync() {
-        context.openFileOutput(fileRepo, Context.MODE_PRIVATE).bufferedWriter().use {
+        context.openFileOutput(FILE_STORE, Context.MODE_PRIVATE).bufferedWriter().use {
             it.write(gson.toJson(posts))
         }
+    }
+
+    override fun findPostById(id: Long): Post {
+        return posts.first { it.id == id }
     }
 }
