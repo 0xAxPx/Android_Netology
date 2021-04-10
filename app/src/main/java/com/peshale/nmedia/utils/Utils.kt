@@ -2,8 +2,12 @@ package com.peshale.nmedia.utils
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.Intent
+import android.text.TextUtils
+import android.util.Patterns
 import android.view.View
 import android.view.inputmethod.InputMethodManager
+import androidx.annotation.Nullable
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import kotlin.math.floor
@@ -32,6 +36,27 @@ class Utils {
             val current = LocalDateTime.now()
             val formatter = DateTimeFormatter.ofPattern("dd MMMM yyyy в HH:mm")
             return current.format(formatter).toString()
+        }
+
+        fun urlValidChecker(link: String): Boolean {
+            return Patterns.WEB_URL.matcher(link).matches()
+        }
+
+        fun startIntent(context: Context, @Nullable intent: Intent?): Boolean {
+            if (intent == null) {
+                return false
+            }
+            val pm = context.packageManager
+            val resolveInfo = pm.resolveActivity(intent, 0)
+            if (resolveInfo != null && resolveInfo.activityInfo != null && !TextUtils.isEmpty(
+                    resolveInfo.activityInfo.name
+                )
+                && !TextUtils.isEmpty(resolveInfo.activityInfo.packageName)
+            ) {
+                context.startActivity(intent)
+                return true
+            }
+            return false
         }
     }
 }

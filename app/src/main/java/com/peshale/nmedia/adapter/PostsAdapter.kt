@@ -1,6 +1,7 @@
 package com.peshale.nmedia.adapter
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import android.widget.PopupMenu
 import androidx.recyclerview.widget.DiffUtil
@@ -18,6 +19,7 @@ interface OnItemClickListener {
     fun onDelete(post: Post) {}
     fun onEdit(post: Post) {}
     fun onCancelEdit(post: Post) {}
+    fun onPlayVideo(post: Post) {}
 }
 
 class PostAdapter(private val onItemClickListener: OnItemClickListener): ListAdapter<Post, PostViewHolder>(PostDiffCallback()) {
@@ -47,6 +49,12 @@ class PostViewHolder (
             shareButton.text = Utils.counter(post.shares)
             numberOfViews.text = Utils.counter(post.views)
             likeButton.isChecked = post.likedByMe
+
+            if (post.video == "") {
+                postVideo.visibility = View.GONE
+            } else {
+                postVideo.visibility = View.VISIBLE
+            }
 
             //when click on Menu item, we do either edit or delete
             menu.setOnClickListener { it ->

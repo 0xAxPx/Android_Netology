@@ -2,8 +2,10 @@ package com.peshale.nmedia.dto
 
 data class Post(
     val id: Long,
-    val author: String,
+    val avatar: Int,
+    val author: String?,
     val content: String,
+    val video: String?,
     val published: String,
     val likedByMe: Boolean = false,
     var likes: Int = 0,
