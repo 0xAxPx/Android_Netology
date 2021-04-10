@@ -74,6 +74,16 @@
         app:layout_constraintStart_toStartOf="parent"
         tools:text="@sample/posts.json/data/content" />
 
+    <ImageButton
+        android:id="@+id/postVideo"
+        android:layout_width="280dp"
+        android:layout_height="200dp"
+        android:src="@drawable/movies_icon"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@id/barrierBottom"
+        app:layout_constraintStart_toStartOf="@id/content"
+        app:layout_constraintTop_toBottomOf="@id/content" />
+
     <com.google.android.material.button.MaterialButton
         android:id="@+id/likeButton"
         style="@style/AppCheckableButton"

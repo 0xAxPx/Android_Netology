@@ -8,10 +8,15 @@ import com.peshale.nmedia.repository.PostRepositoryInMemoryImpl
 
 private val empty = Post(
     id = 0,
+    avatar = 0,
     content = "",
     author = "",
     likedByMe = false,
-    published = ""
+    published = "",
+    likes = 0,
+    shares = 0,
+    views = 0,
+    video = ""
 )
 
 
@@ -32,12 +37,13 @@ class PostViewModel : ViewModel() {
         edited.value = post
     }
 
-    fun editContent(content: String) {
+    fun changeContent(content: String, videoLink: String) {
         val text = content.trim()
-        if (edited.value?.content == text) {
+        val link = videoLink.trim()
+        if (edited.value?.content == text && edited.value?.video == link) {
             return
         }
-        edited.value = edited.value?.copy(content = text)
+        edited.value = edited.value?.copy(content = text, video = link)
     }
 
     fun cancelEdit() {
