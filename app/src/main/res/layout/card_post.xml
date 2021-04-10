@@ -92,22 +92,13 @@
         android:layout_marginBottom="@dimen/common_spacing"
         android:layout_marginTop="@dimen/common_spacing"
         android:background="@android:color/transparent"
+        android:text="@string/number_of_likes"
         android:textAppearance="@style/TextStyle"
-        android:contentDescription="@string/like_button"
         android:checkable="true"
         app:icon="@drawable/selector_like"
         app:iconTint="@color/selector_like_color"
         app:layout_constraintTop_toTopOf="@id/barrierBottom"
         app:layout_constraintStart_toStartOf="parent" />
-
-    <TextView
-        android:id="@+id/numberOfLikes"
-        android:layout_width="50dp"
-        android:layout_height="24dp"
-        android:textAlignment="center"
-        android:gravity="center_horizontal"
-        app:layout_constraintStart_toEndOf="@+id/likeButton"
-        app:layout_constraintTop_toTopOf="@+id/likeButton"/>
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/shareButton"
@@ -116,7 +107,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/common_spacing"
         android:layout_marginLeft="@dimen/common_spacing"
-        android:contentDescription="@string/to_share"
+        android:text="@string/number_of_share"
         android:textAppearance="@style/TextStyle"
         android:textColor="@color/colorPrimary"
         app:icon="@drawable/share_black_24dp"
@@ -124,22 +115,14 @@
         app:layout_constraintStart_toEndOf="@id/likeButton"
         app:layout_constraintTop_toTopOf="@id/likeButton" />
 
-    <TextView
-        android:id="@+id/numberOfShare"
-        android:layout_width="50dp"
-        android:layout_height="24dp"
-        android:textAlignment="center"
-        android:gravity="center_horizontal"
-        app:layout_constraintStart_toEndOf="@id/shareButton"
-        app:layout_constraintTop_toTopOf="@id/shareButton"/>
-
-
-    <com.google.android.material.imageview.ShapeableImageView
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/viewsButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@android:color/transparent"
-        android:contentDescription="@string/views"
+        android:text="@string/number_of_views"
+        android:textAppearance="@style/TextStyle"
+        app:icon="@drawable/baseline_visibility_black_24dp"
         android:padding="4dp"
         android:scaleType="center"
         app:layout_constraintEnd_toStartOf="@+id/numberOfViews"
