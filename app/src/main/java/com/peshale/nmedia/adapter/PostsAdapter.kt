@@ -43,16 +43,10 @@ class PostViewHolder (
             author.text = post.author
             published.text = post.published
             content.text = post.content
-            numberOfLikes.text = Utils.counter(post.likes)
-            numberOfShare.text = Utils.counter(post.shares)
+            likeButton.text = Utils.counter(post.likes)
+            shareButton.text = Utils.counter(post.shares)
             numberOfViews.text = Utils.counter(post.views)
-            likeButton.setImageResource(
-                if (post.likedByMe) {
-                    R.drawable.baseline_favorite_red_500_24dp
-                } else {
-                    R.drawable.baseline_favorite_border_black_24dp
-                }
-            )
+            likeButton.isChecked = post.likedByMe
 
             //when click on Menu item, we do either edit or delete
             menu.setOnClickListener { it ->
