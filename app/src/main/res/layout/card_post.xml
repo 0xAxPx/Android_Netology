@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:padding="@dimen/common_spacing"
-    tools:context=".activity.MainActivity">
+    tools:context=".activity.MainFragment">
 
     <ImageView
         android:id= "@+id/avatar"
@@ -110,23 +110,22 @@
         android:text="@string/number_of_share"
         android:textAppearance="@style/TextStyle"
         android:textColor="@color/colorPrimary"
-        app:icon="@drawable/baseline_share_black_24dp"
+        app:icon="@drawable/share_black_24dp"
         app:iconTint="@color/colorPrimary"
         app:layout_constraintStart_toEndOf="@id/likeButton"
         app:layout_constraintTop_toTopOf="@id/likeButton" />
 
-    <com.google.android.material.button.MaterialButton
+    <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/viewsButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@android:color/transparent"
-        android:text="@string/number_of_views"
-        android:textAppearance="@style/TextStyle"
-        app:icon="@drawable/baseline_visibility_black_24dp"
+        android:contentDescription="@string/views"
         android:padding="4dp"
         android:scaleType="center"
         app:layout_constraintEnd_toStartOf="@+id/numberOfViews"
-        app:layout_constraintTop_toTopOf="@id/numberOfViews" />
+        app:layout_constraintTop_toTopOf="@id/numberOfViews"
+        app:srcCompat="@drawable/visibility_black_24dp" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/numberOfViews"

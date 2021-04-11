@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.peshale.nmedia.R
 import com.peshale.nmedia.databinding.CardPostBinding
 import com.peshale.nmedia.dto.Post
-import com.peshale.nmedia.utils.Utils
+import com.peshale.nmedia.utils.AndroidUtils
 
 interface OnItemClickListener {
     fun onLike(post: Post) {}
@@ -20,6 +20,7 @@ interface OnItemClickListener {
     fun onEdit(post: Post) {}
     fun onCancelEdit(post: Post) {}
     fun onPlayVideo(post: Post) {}
+    fun onPost(post: Post) {}
 }
 
 class PostAdapter(private val onItemClickListener: OnItemClickListener): ListAdapter<Post, PostViewHolder>(PostDiffCallback()) {
@@ -45,9 +46,9 @@ class PostViewHolder (
             author.text = post.author
             published.text = post.published
             content.text = post.content
-            likeButton.text = Utils.counter(post.likes)
-            shareButton.text = Utils.counter(post.shares)
-            numberOfViews.text = Utils.counter(post.views)
+            likeButton.text = AndroidUtils.counter(post.likes)
+            shareButton.text = AndroidUtils.counter(post.shares)
+            numberOfViews.text = AndroidUtils.counter(post.views)
             likeButton.isChecked = post.likedByMe
 
             if (post.video == "") {
@@ -83,6 +84,12 @@ class PostViewHolder (
             }
             viewsButton.setOnClickListener {
                 onItemClickListener.onView(post)
+            }
+            postVideo.setOnClickListener {
+                onItemClickListener.onPlayVideo(post)
+            }
+            content.setOnClickListener {
+                onItemClickListener.onPost(post)
             }
         }
     }

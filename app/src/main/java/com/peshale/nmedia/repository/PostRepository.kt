@@ -11,4 +11,5 @@ interface PostRepository {
     fun toViewById(id: Long)
     fun deleteById(id: Long)
     fun addPost(post: Post)
+    fun findPostById(id: Long): Post
 }

@@ -1,5 +1,9 @@
 package com.peshale.nmedia.dto
 
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
+
+@Parcelize
 data class Post(
     val id: Long,
     val avatar: Int,
@@ -11,4 +15,4 @@ data class Post(
     var likes: Int = 0,
     val shares: Int = 0,
     val views: Int = 0
-)
+) : Parcelable
