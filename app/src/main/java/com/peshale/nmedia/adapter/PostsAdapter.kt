@@ -18,7 +18,6 @@ interface OnItemClickListener {
     fun onView(post: Post) {}
     fun onDelete(post: Post) {}
     fun onEdit(post: Post) {}
-    fun onCancelEdit(post: Post) {}
     fun onPlayVideo(post: Post) {}
     fun onPost(post: Post) {}
 }
