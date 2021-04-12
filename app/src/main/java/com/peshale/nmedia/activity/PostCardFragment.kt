@@ -38,7 +38,6 @@ class PostCardFragment : Fragment() {
         )
 
         binding.apply {
-            logo.setImageResource(post.avatar)
             tvAuthorPost.text = post.author
             published.text = post.published
             content.text = post.content
@@ -100,9 +99,9 @@ class PostCardFragment : Fragment() {
                         }
                         R.id.menuItemEdit -> {
                             val bundle = Bundle().apply {
-                                putString("content", post.content)
-                                putString("videoLink", post.video)
-                                putLong("postId", post.id)
+                                putString(Arguments.CONTENT, post.content)
+                                putString(Arguments.VIDEO_LINK, post.video)
+                                putLong(Arguments.POST_ID, post.id)
                             }
                             findNavController().navigate(
                                 R.id.action_postCardFragment_to_editPostFragment,

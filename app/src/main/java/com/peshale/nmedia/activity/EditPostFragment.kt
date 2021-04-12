@@ -31,9 +31,9 @@ class EditPostFragment : Fragment() {
             false
         )
 
-        val textForEdit = arguments?.getString("content").toString()
-        val videoLinkForEdit = arguments?.getString("videoLink").toString()
-        val postId = arguments?.getLong("postId")
+        val textForEdit = arguments?.getString(Arguments.CONTENT).toString()
+        val videoLinkForEdit = arguments?.getString(Arguments.VIDEO_LINK).toString()
+        val postId = arguments?.getLong(Arguments.POST_ID)
 
         binding.etInputArea.setText(textForEdit)
         binding.etEditedPostVideoLink.setText(videoLinkForEdit)

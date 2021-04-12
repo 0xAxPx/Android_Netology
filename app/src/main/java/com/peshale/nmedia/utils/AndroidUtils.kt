@@ -44,7 +44,8 @@ class AndroidUtils {
         }
 
         fun urlValidChecker(link: String): Boolean {
-            return Patterns.WEB_URL.matcher(link).matches()
+            val videoLink = link.trim()
+            return Patterns.WEB_URL.matcher(videoLink).matches()
         }
 
         fun startIntent(context: Context, @Nullable intent: Intent?): Boolean {

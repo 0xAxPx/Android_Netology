@@ -57,9 +57,9 @@ class MainFragment : Fragment() {
 
             override fun onEdit(post: Post) {
                 val bundle = Bundle().apply {
-                    putString("content", post.content)
-                    putString("videoLink", post.video)
-                    putLong("postId", post.id)
+                    putString(Arguments.CONTENT, post.content)
+                    putString(Arguments.VIDEO_LINK, post.video)
+                    putLong(Arguments.POST_ID, post.id)
                 }
                 findNavController().navigate(R.id.action_mainFragment_to_editPostFragment, bundle)
             }
