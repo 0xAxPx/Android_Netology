@@ -1,8 +1,7 @@
 package com.peshale.nmedia.repository
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.map
+import androidx.lifecycle.Transformations
 import com.peshale.nmedia.dao.PostDao
 import com.peshale.nmedia.dto.Post
 import com.peshale.nmedia.entity.PostEntity
@@ -13,13 +12,13 @@ class PostRepositorySQLiteImpl(
     private val dao: PostDao
 ) : PostRepository {
 
-    override fun getAll(): LiveData<List<Post>> = dao.getAll().map {
-        it.map(PostEntity::toPost)
-    }
+    override fun getAll(): LiveData<List<Post>> =
+        Transformations.map(dao.getAll()) { it.map(PostEntity::toPost) }
 
     override fun addPost(post: Post) {
         dao.addPost(PostEntity.fromPost(post))
     }
+
 
     override fun likeById(id: Long) {
         dao.likedById(id)
