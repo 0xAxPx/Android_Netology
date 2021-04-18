@@ -11,6 +11,7 @@ import androidx.navigation.fragment.findNavController
 import com.peshale.nmedia.R
 import com.peshale.nmedia.databinding.FragmentEditPostBinding
 import com.peshale.nmedia.utils.AndroidUtils
+import com.peshale.nmedia.utils.Arguments
 import com.peshale.nmedia.vmodel.PostViewModel
 
 class EditPostFragment : Fragment() {

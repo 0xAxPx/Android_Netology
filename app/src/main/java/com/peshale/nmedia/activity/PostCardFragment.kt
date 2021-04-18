@@ -15,6 +15,7 @@ import com.peshale.nmedia.R
 import com.peshale.nmedia.databinding.FragmentPostCardBinding
 import com.peshale.nmedia.dto.Post
 import com.peshale.nmedia.utils.AndroidUtils
+import com.peshale.nmedia.utils.Arguments
 import com.peshale.nmedia.vmodel.PostViewModel
 
 class PostCardFragment : Fragment() {

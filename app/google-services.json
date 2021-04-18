@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "981717668174",
+    "project_id": "nmediaandroid",
+    "storage_bucket": "nmediaandroid.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:981717668174:android:f92d289086632ecfe54e1f",
+        "android_client_info": {
+          "package_name": "com.peshale.nmedia"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "981717668174-glact8l7daok0hhrm2utttkjgp5oglp5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCd9jk4i9TpwLuRGP4KTvqZM6zMB_sOe6Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "981717668174-glact8l7daok0hhrm2utttkjgp5oglp5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
