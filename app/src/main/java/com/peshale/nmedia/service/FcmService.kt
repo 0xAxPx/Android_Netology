@@ -58,13 +58,13 @@ class FcmService : FirebaseMessagingService() {
     private fun handleNewPost(content: NewPost) {
         val remoteViews = RemoteViews(packageName, R.layout.notification)
         remoteViews.setTextViewText(
-            R.id.tvNotificationTitle,
+            R.id.notificationTitle,
             getString(
                 R.string.notification_new_post,
                 content.userName
             )
         )
-        remoteViews.setTextViewText(R.id.tvNotification, content.text)
+        remoteViews.setTextViewText(R.id.notificationText, content.text)
         val resultIntent = Intent(this, AppActivity::class.java)
 
         val resultPendingIntent: PendingIntent? = TaskStackBuilder.create(this).run {
