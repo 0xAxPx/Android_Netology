@@ -28,4 +28,5 @@
     <string name="notification_else_action">Кое-что изменилось в посту %1$s. Давайте посмотрим!.</string>
     <string name="notification_user_share">Пользователь %1$s поделился постом %2$s</string>
     <string name="notification_new_post">Пользователь %1$s создал новый пост</string>
+    <string name="notification_new_viewer">Пользователь %1$s просмотрел пост</string>
 </resources>

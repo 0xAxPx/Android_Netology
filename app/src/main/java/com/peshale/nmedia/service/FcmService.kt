@@ -10,8 +10,6 @@ import android.widget.RemoteViews
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import androidx.core.app.TaskStackBuilder
-import com.google.android.gms.common.GoogleApiAvailabilityLight
-import com.google.firebase.messaging.FirebaseMessaging
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 import com.google.gson.Gson
@@ -28,7 +26,6 @@ class FcmService : FirebaseMessagingService() {
 
     override fun onCreate() {
         super.onCreate()
-        println("Token (onCreate) -> ${FirebaseMessaging.getInstance().token}")
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val name = getString(R.string.channel_remote_name)
             val descriptionText = getString(R.string.channel_remote_description)
@@ -39,12 +36,7 @@ class FcmService : FirebaseMessagingService() {
             val manager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
             manager.createNotificationChannel(channel)
         }
-        //googleApiCompatibility()
     }
-
-//    private fun googleApiCompatibility() {
-//        with(GoogleApiAvailability.getInstance())
-//    }
 
     override fun onMessageReceived(message: RemoteMessage) {
 
@@ -52,19 +44,15 @@ class FcmService : FirebaseMessagingService() {
             when (it) {
                 "LIKE" -> handleLike(gson.fromJson(message.data[content], Like::class.java))
                 "SHARE" -> handleShare(gson.fromJson(message.data[content], Share::class.java))
-                "NewPost" -> handleNewPost(
-                    gson.fromJson(
-                        message.data[content],
-                        NewPost::class.java
-                    )
-                )
+                "VIEW" -> handleView(gson.fromJson(message.data[content], View::class.java))
+                "NEW_POST" -> handleNewPost(gson.fromJson(message.data[content], NewPost::class.java))
                 else -> handleElse(gson.fromJson(message.data[content], Else::class.java))
             }
         }
     }
 
     override fun onNewToken(token: String) {
-        println("Token ->  $token")
+        println("$token")
     }
 
     private fun handleNewPost(content: NewPost) {
@@ -73,7 +61,7 @@ class FcmService : FirebaseMessagingService() {
             R.id.tvNotificationTitle,
             getString(
                 R.string.notification_new_post,
-                content.author
+                content.userName
             )
         )
         remoteViews.setTextViewText(R.id.tvNotification, content.text)
@@ -86,14 +74,14 @@ class FcmService : FirebaseMessagingService() {
 
         val notification = NotificationCompat.Builder(this, channelId)
             .setContentIntent(resultPendingIntent)
-            .setSmallIcon(R.mipmap.ic_launcher)
+            .setSmallIcon(R.drawable.netology)
             .setCustomContentView(remoteViews)
             .setStyle(NotificationCompat.DecoratedCustomViewStyle())
             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
             .build()
 
         NotificationManagerCompat.from(this)
-            .notify(Random.nextInt(100_000), notification)
+            .notify(Random.nextInt(RANDOM_INT), notification)
     }
 
     private fun handleLike(content: Like) {
@@ -130,6 +118,22 @@ class FcmService : FirebaseMessagingService() {
             .notify(Random.nextInt(RANDOM_INT), notification)
     }
 
+    private fun handleView(content: View) {
+        val notification = NotificationCompat.Builder(this, channelId)
+            .setSmallIcon(R.drawable.netology)
+            .setContentTitle(
+                getString(
+                    R.string.notification_new_viewer,
+                    content.postAuthor,
+                )
+            )
+            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+            .build()
+
+        NotificationManagerCompat.from(this)
+            .notify(Random.nextInt(RANDOM_INT), notification)
+    }
+
     private fun handleElse(content: Else) {
         val notification = NotificationCompat.Builder(this, channelId)
             .setSmallIcon(R.drawable.netology)
@@ -149,6 +153,7 @@ class FcmService : FirebaseMessagingService() {
 
 data class NewPost(
     val id: Long,
+    val userName: String,
     val author: String,
     val text: String,
 )
@@ -161,6 +166,13 @@ data class Like(
 )
 
 data class Share(
+    val userId: Long,
+    val userName: String,
+    val postId: Long,
+    val postAuthor: String,
+)
+
+data class View(
     val userId: Long,
     val userName: String,
     val postId: Long,
