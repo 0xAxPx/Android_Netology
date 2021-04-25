@@ -16,6 +16,7 @@ import com.peshale.nmedia.adapter.PostAdapter
 import com.peshale.nmedia.databinding.FragmentMainBinding
 import com.peshale.nmedia.dto.Post
 import com.peshale.nmedia.utils.AndroidUtils
+import com.peshale.nmedia.utils.Arguments
 import com.peshale.nmedia.vmodel.PostViewModel
 
 class MainFragment : Fragment() {

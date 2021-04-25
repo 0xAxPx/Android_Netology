@@ -12,8 +12,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.peshale.nmedia.R
-import com.peshale.nmedia.activity.Arguments.DRAFT_TEXT
-import com.peshale.nmedia.activity.Arguments.DRAFT_VIDEO_LINK
+import com.peshale.nmedia.utils.Arguments.DRAFT_TEXT
+import com.peshale.nmedia.utils.Arguments.DRAFT_VIDEO_LINK
 import com.peshale.nmedia.databinding.FragmentNewPostBinding
 import com.peshale.nmedia.utils.AndroidUtils
 import com.peshale.nmedia.vmodel.PostViewModel

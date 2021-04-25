@@ -7,13 +7,14 @@ import com.peshale.nmedia.db.AppDb
 import com.peshale.nmedia.dto.Post
 import com.peshale.nmedia.repository.PostRepository
 import com.peshale.nmedia.repository.PostRepositorySQLiteImpl
+import com.peshale.nmedia.utils.AndroidUtils
 
 private val empty = Post(
     id = 0,
     content = "",
     author = "",
     likedByMe = false,
-    published = "",
+    published = AndroidUtils.addLocalDataTime(),
     likes = 0,
     shares = 0,
     views = 0,
