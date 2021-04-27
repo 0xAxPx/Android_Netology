@@ -1,18 +1,15 @@
 package com.peshale.nmedia.dto
 
-import android.os.Parcelable
-import kotlinx.android.parcel.Parcelize
+import com.google.gson.annotations.SerializedName
 
-@Parcelize
 data class Post(
     val id: Long,
     val author: String?,
+    val authorAvatar: String,
     val content: String,
-    val video: String,
     val published: String,
-    val edited: String,
+    @SerializedName("likedByMe")
     val likedByMe: Boolean = false,
+    @SerializedName("likes")
     var likes: Int = 0,
-    val shares: Int = 0,
-    val views: Int = 0
-) : Parcelable
+)

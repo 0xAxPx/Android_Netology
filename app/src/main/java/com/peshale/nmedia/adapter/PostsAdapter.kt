@@ -14,11 +14,8 @@ import com.peshale.nmedia.utils.AndroidUtils
 
 interface OnItemClickListener {
     fun onLike(post: Post) {}
-    fun onShare(post: Post) {}
-    fun onView(post: Post) {}
     fun onDelete(post: Post) {}
     fun onEdit(post: Post) {}
-    fun onPlayVideo(post: Post) {}
     fun onPost(post: Post) {}
 }
 
@@ -44,23 +41,9 @@ class PostViewHolder (
         binding.apply {
             author.text = post.author
             published.text = post.published
-            if (post.edited == "") {
-                edited.visibility = View.GONE
-            } else {
-                edited.text = post.edited
-                edited.visibility = View.VISIBLE
-            }
             content.text = post.content
             likeButton.text = AndroidUtils.counter(post.likes)
-            shareButton.text = AndroidUtils.counter(post.shares)
-            numberOfViews.text = AndroidUtils.counter(post.views)
             likeButton.isChecked = post.likedByMe
-
-            if (post.video == "") {
-                postVideo.visibility = View.GONE
-            } else {
-                postVideo.visibility = View.VISIBLE
-            }
 
             //when click on Menu item, we do either edit or delete
             menu.setOnClickListener { it ->
@@ -83,15 +66,6 @@ class PostViewHolder (
             }
             likeButton.setOnClickListener {
                 onItemClickListener.onLike(post)
-            }
-            shareButton.setOnClickListener {
-                onItemClickListener.onShare(post)
-            }
-            viewsButton.setOnClickListener {
-                onItemClickListener.onView(post)
-            }
-            postVideo.setOnClickListener {
-                onItemClickListener.onPlayVideo(post)
             }
             content.setOnClickListener {
                 onItemClickListener.onPost(post)

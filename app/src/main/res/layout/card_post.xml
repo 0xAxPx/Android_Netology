@@ -46,20 +46,6 @@
         app:layout_constraintTop_toBottomOf="@id/author"
         tools:text="@sample/posts.json/data/published" />
 
-    <TextView
-        android:id="@+id/edited"
-        style="@style/SmallLightGreyTextStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/common_spacing"
-        android:layout_marginEnd="@dimen/common_spacing"
-        android:layout_marginBottom="@dimen/common_spacing"
-        android:visibility="visible"
-        app:layout_constraintBottom_toBottomOf="@id/barrierTop"
-        app:layout_constraintStart_toEndOf="@id/avatar"
-        app:layout_constraintTop_toBottomOf="@id/published"
-        tools:text="@sample/posts.json/data/edited" />
-
     <com.google.android.material.button.MaterialButton
         android:id="@+id/menu"
         style="@style/AppNormalButton"
@@ -88,17 +74,6 @@
         app:layout_constraintStart_toStartOf="parent"
         tools:text="@sample/posts.json/data/content" />
 
-    <ImageButton
-        android:id="@+id/postVideo"
-        android:layout_width="280dp"
-        android:layout_height="200dp"
-        android:src="@drawable/movies_icon"
-        android:visibility="gone"
-        app:layout_constraintBottom_toTopOf="@id/barrierBottom"
-        app:layout_constraintStart_toStartOf="@id/content"
-        app:layout_constraintTop_toBottomOf="@id/content"
-        android:contentDescription="TODO" />
-
     <com.google.android.material.button.MaterialButton
         android:id="@+id/likeButton"
         style="@style/AppCheckableButton"
@@ -115,53 +90,53 @@
         app:layout_constraintTop_toTopOf="@id/barrierBottom"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/shareButton"
-        style="@style/AppNormalButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/common_spacing"
-        android:layout_marginLeft="@dimen/common_spacing"
-        android:text="@string/number_of_share"
-        android:textAppearance="@style/TextStyle"
-        android:textColor="@color/colorPrimary"
-        app:icon="@drawable/share_black_24dp"
-        app:iconTint="@color/colorPrimary"
-        app:layout_constraintStart_toEndOf="@id/likeButton"
-        app:layout_constraintTop_toTopOf="@id/likeButton" />
+<!--    <com.google.android.material.button.MaterialButton-->
+<!--        android:id="@+id/shareButton"-->
+<!--        style="@style/AppNormalButton"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginStart="@dimen/common_spacing"-->
+<!--        android:layout_marginLeft="@dimen/common_spacing"-->
+<!--        android:text="@string/number_of_share"-->
+<!--        android:textAppearance="@style/TextStyle"-->
+<!--        android:textColor="@color/colorPrimary"-->
+<!--        app:icon="@drawable/share_black_24dp"-->
+<!--        app:iconTint="@color/colorPrimary"-->
+<!--        app:layout_constraintStart_toEndOf="@id/likeButton"-->
+<!--        app:layout_constraintTop_toTopOf="@id/likeButton" />-->
 
-    <com.google.android.material.imageview.ShapeableImageView
-        android:id="@+id/viewsButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@android:color/transparent"
-        android:contentDescription="@string/views"
-        android:padding="4dp"
-        android:scaleType="center"
-        app:layout_constraintEnd_toStartOf="@+id/numberOfViews"
-        app:layout_constraintTop_toTopOf="@id/numberOfViews"
-        app:srcCompat="@drawable/visibility_black_24dp" />
+<!--    <com.google.android.material.imageview.ShapeableImageView-->
+<!--        android:id="@+id/viewsButton"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:background="@android:color/transparent"-->
+<!--        android:contentDescription="@string/views"-->
+<!--        android:padding="4dp"-->
+<!--        android:scaleType="center"-->
+<!--        app:layout_constraintEnd_toStartOf="@+id/numberOfViews"-->
+<!--        app:layout_constraintTop_toTopOf="@id/numberOfViews"-->
+<!--        app:srcCompat="@drawable/visibility_black_24dp" />-->
 
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/numberOfViews"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/common_spacing"
-        android:padding="4dp"
-        android:textAlignment="center"
-        android:gravity="center_horizontal"
-        android:textAppearance="@style/TextStyle"
-        app:layout_constraintBottom_toBottomOf="@+id/shareButton"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/barrierBottom"
-        tools:text="@string/number_of_views" />
+<!--    <com.google.android.material.textview.MaterialTextView-->
+<!--        android:id="@+id/numberOfViews"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginTop="@dimen/common_spacing"-->
+<!--        android:padding="4dp"-->
+<!--        android:textAlignment="center"-->
+<!--        android:gravity="center_horizontal"-->
+<!--        android:textAppearance="@style/TextStyle"-->
+<!--        app:layout_constraintBottom_toBottomOf="@+id/shareButton"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="@id/barrierBottom"-->
+<!--        tools:text="@string/number_of_views" />-->
 
     <androidx.constraintlayout.widget.Barrier
         android:id="@+id/barrierTop"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:barrierDirection="bottom"
-        app:constraint_referenced_ids="avatar,published,menu"
+        app:constraint_referenced_ids="avatar,menu"
         tools:layout_editor_absoluteX="16dp"
         tools:layout_editor_absoluteY="80dp" />
 

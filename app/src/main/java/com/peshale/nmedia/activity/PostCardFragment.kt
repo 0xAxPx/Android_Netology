@@ -31,7 +31,7 @@ class PostCardFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
 
-        val post = arguments?.getParcelable<Post>("post") as Post
+        var post = viewModel.searchPost(arguments?.get("postId") as Long)
 
         val binding = FragmentPostCardBinding.inflate(
             inflater,
@@ -42,57 +42,21 @@ class PostCardFragment : Fragment() {
         binding.apply {
             tvAuthorPost.text = post.author
             published.text = post.published
-            if (post.edited == "") {
-                edited.visibility = View.GONE
-            } else {
-                edited.text = post.edited
-                edited.visibility = View.VISIBLE
-            }
             content.text = post.content
             likeButton.text = AndroidUtils.counter(post.likes)
-            toShareButton.text = AndroidUtils.counter(post.shares)
-            numberOfViews.text = AndroidUtils.counter(post.views)
             likeButton.isChecked = post.likedByMe
-
-            if (post.video == "") {
-                postVideo.visibility = View.GONE
-            } else {
-                postVideo.visibility = View.VISIBLE
-            }
         }
 
         binding.likeButton.setOnClickListener {
-            viewModel.likeById(post.id)
-            val updatedPost = viewModel.searchPost(post.id)
-            binding.likeButton.text = updatedPost.likes.toString()
-        }
-
-        binding.toShareButton.setOnClickListener {
-            viewModel.toShareById(post.id)
-            val updatedPost = viewModel.searchPost(post.id)
-            binding.toShareButton.text = updatedPost.shares.toString()
-            val intent = Intent().apply {
-                action = Intent.ACTION_SEND
-                putExtra(Intent.EXTRA_TEXT, post.content)
-                type = "text/plain"
+            if (!post.likedByMe) {
+                viewModel.likeById(post.id)
+            } else {
+                viewModel.unlikeById(post.id)
             }
-            val shareIntent =
-                Intent.createChooser(intent, getString(R.string.chooser_share_post))
-            startActivity(shareIntent)
-        }
-
-        binding.postVideo.setOnClickListener {
-            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(post.video))
-            val playVideoValidation = context?.let { AndroidUtils.startIntent(it, intent) }
-            if (playVideoValidation == false) {
-                Toast.makeText(
-                    activity,
-                    getString(R.string.error_play_video_validation),
-                    Toast.LENGTH_SHORT
-                ).show()
-                return@setOnClickListener
-            }
-            startActivity(intent)
+            viewModel.data.observe(viewLifecycleOwner, {
+                post = viewModel.searchPost(post.id)
+                binding.likeButton.text = AndroidUtils.counter(post.likes)
+            })
         }
 
         binding.ibMenu.setOnClickListener {
@@ -108,7 +72,6 @@ class PostCardFragment : Fragment() {
                         R.id.menuItemEdit -> {
                             val bundle = Bundle().apply {
                                 putString(Arguments.CONTENT, post.content)
-                                putString(Arguments.VIDEO_LINK, post.video)
                                 putLong(Arguments.POST_ID, post.id)
                             }
                             findNavController().navigate(

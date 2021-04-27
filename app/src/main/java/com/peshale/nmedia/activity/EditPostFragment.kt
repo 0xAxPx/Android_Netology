@@ -33,39 +33,27 @@ class EditPostFragment : Fragment() {
         )
 
         val textForEdit = arguments?.getString(Arguments.CONTENT).toString()
-        val videoLinkForEdit = arguments?.getString(Arguments.VIDEO_LINK).toString()
         val postId = arguments?.getLong(Arguments.POST_ID)
 
         binding.etInputArea.setText(textForEdit)
-        binding.etEditedPostVideoLink.setText(videoLinkForEdit)
 
         binding.etInputArea.requestFocus()
 
         binding.fabConfirmation.setOnClickListener {
-            if (binding.etInputArea.text.isNullOrBlank() && binding.etEditedPostVideoLink.text.isNullOrBlank()) {
+            if (binding.etInputArea.text.isNullOrBlank()) {
                 AndroidUtils.hideKeyboard(requireView())
                 findNavController().navigateUp()
                 return@setOnClickListener
             }
 
             val content = binding.etInputArea.text.toString()
-            val videoLink = binding.etEditedPostVideoLink.text.toString()
-            val dateOfEditing = "изменено: ${AndroidUtils.addLocalDataTime()}"
-            if (videoLinkForEdit != "" && !AndroidUtils.urlValidChecker(videoLinkForEdit)) {
-                Toast.makeText(
-                    activity,
-                    getString(R.string.error_url_validation),
-                    Toast.LENGTH_SHORT
-                ).show()
-                return@setOnClickListener
+            if (postId != null) {
+                viewModel.changeContent(postId, content)
             }
+            viewModel.updatePost()
 
             AndroidUtils.hideKeyboard(requireView())
 
-            viewModel.changeContent(content, videoLink, dateOfEditing)
-            if (postId != null) {
-                viewModel.searchAndChangePost(postId.toLong())
-            }
             findNavController().navigate(R.id.mainFragment)
         }
 
