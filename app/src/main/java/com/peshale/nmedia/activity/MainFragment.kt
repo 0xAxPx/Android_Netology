@@ -88,6 +88,7 @@ class MainFragment : Fragment() {
             }
 
             override fun onPost(post: Post) {
+                viewModel.toViewById(post.id)
                 val bundle = Bundle().apply {
                     putParcelable("post", post)
                 }

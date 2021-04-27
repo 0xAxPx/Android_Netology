@@ -50,6 +50,7 @@ class EditPostFragment : Fragment() {
 
             val content = binding.etInputArea.text.toString()
             val videoLink = binding.etEditedPostVideoLink.text.toString()
+            val dateOfEditing = "изменено: ${AndroidUtils.addLocalDataTime()}"
             if (videoLinkForEdit != "" && !AndroidUtils.urlValidChecker(videoLinkForEdit)) {
                 Toast.makeText(
                     activity,
@@ -61,7 +62,7 @@ class EditPostFragment : Fragment() {
 
             AndroidUtils.hideKeyboard(requireView())
 
-            viewModel.changeContent(content, videoLink)
+            viewModel.changeContent(content, videoLink, dateOfEditing)
             if (postId != null) {
                 viewModel.searchAndChangePost(postId.toLong())
             }

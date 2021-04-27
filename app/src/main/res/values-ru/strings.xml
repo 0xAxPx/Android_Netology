@@ -29,4 +29,7 @@
     <string name="notification_user_share">Пользователь %1$s поделился постом %2$s</string>
     <string name="notification_new_post">Пользователь %1$s создал новый пост</string>
     <string name="notification_new_viewer">Пользователь %1$s просмотрел пост</string>
+    <string name="error_loading">Что-то пошло не так. Повторите попытку позже</string>
+    <string name="retry_loading">Попробуйте снова</string>
+    <string name="empty_posts">Нет сообщений</string>
 </resources>

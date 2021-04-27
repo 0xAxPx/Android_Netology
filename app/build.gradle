@@ -17,6 +17,7 @@ ext {
     nav_version = "2.3.1"
     frag_version = "1.2.5"
     room_version = "2.2.5"
+    okhttp_version = "4.9.1"
 }
 
 android {
@@ -37,6 +38,10 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            manifestPlaceholders.usesCleartextTraffic = false
+        }
+        debug {
+            manifestPlaceholders.usesCleartextTraffic = true
         }
     }
     compileOptions {
@@ -70,6 +75,8 @@ dependencies {
     implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
     implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
     implementation "androidx.room:room-runtime:$room_version"
+    implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.0.0'
+    implementation "com.squareup.okhttp3:okhttp:$okhttp_version"
     kapt "androidx.room:room-compiler:$room_version"
 
     ///Firebase bom

@@ -44,6 +44,12 @@ class PostViewHolder (
         binding.apply {
             author.text = post.author
             published.text = post.published
+            if (post.edited == "") {
+                edited.visibility = View.GONE
+            } else {
+                edited.text = post.edited
+                edited.visibility = View.VISIBLE
+            }
             content.text = post.content
             likeButton.text = AndroidUtils.counter(post.likes)
             shareButton.text = AndroidUtils.counter(post.shares)

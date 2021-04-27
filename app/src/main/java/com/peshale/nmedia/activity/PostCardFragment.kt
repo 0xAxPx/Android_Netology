@@ -17,6 +17,7 @@ import com.peshale.nmedia.dto.Post
 import com.peshale.nmedia.utils.AndroidUtils
 import com.peshale.nmedia.utils.Arguments
 import com.peshale.nmedia.vmodel.PostViewModel
+import kotlinx.android.synthetic.main.card_post.*
 
 class PostCardFragment : Fragment() {
 
@@ -41,6 +42,12 @@ class PostCardFragment : Fragment() {
         binding.apply {
             tvAuthorPost.text = post.author
             published.text = post.published
+            if (post.edited == "") {
+                edited.visibility = View.GONE
+            } else {
+                edited.text = post.edited
+                edited.visibility = View.VISIBLE
+            }
             content.text = post.content
             likeButton.text = AndroidUtils.counter(post.likes)
             toShareButton.text = AndroidUtils.counter(post.shares)
